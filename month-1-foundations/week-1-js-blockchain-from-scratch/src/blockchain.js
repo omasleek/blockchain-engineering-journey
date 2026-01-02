@@ -26,7 +26,7 @@ class Blockchain {
   }
 }
 
-// Test blockchain
+// Test my blockchain
 const myBlockchain = new Blockchain();
 myBlockchain.addBlock({ amount: 50 });
 myBlockchain.addBlock({ amount: 100 });
