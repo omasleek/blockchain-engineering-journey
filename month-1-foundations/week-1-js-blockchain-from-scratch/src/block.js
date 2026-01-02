@@ -26,3 +26,5 @@ class Block {
 const block = new Block(1, new Date().toISOString(), { amount: 100 }, "abc123");
 
 console.log(block);
+module.exports = Block;
+
