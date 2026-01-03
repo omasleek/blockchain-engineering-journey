@@ -27,8 +27,10 @@ class Blockchain {
 }
 
 // Test my blockchain
-const myBlockchain = new Blockchain();
-myBlockchain.addBlock({ amount: 50 });
-myBlockchain.addBlock({ amount: 100 });
+let myCoin = new Blockchain();
 
-console.log(JSON.stringify(myBlockchain, null, 2));
+myCoin.addBlock(new Block(1, new Date().toISOString(), { amount: 50 }));
+
+myCoin.addBlock(new Block(2, new Date().toISOString(), { amount: 200 }));
+
+console.log(JSON.stringify(myCoin, null, 2));
