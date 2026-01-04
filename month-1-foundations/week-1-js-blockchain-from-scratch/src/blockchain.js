@@ -24,13 +24,35 @@ class Blockchain {
 
     this.chain.push(newBlock);
   }
+  isChainValid() {
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
+
+      if (currentBlock.hash !== currentBlock.calculateHash()) {
+        return false;
+      }
+
+      if (currentBlock.previousHash !== previousBlock.hash) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 // Test my blockchain
 let myCoin = new Blockchain();
 
-myCoin.addBlock(new Block(1, new Date().toISOString(), { amount: 50 }));
+myCoin.addBlock({ amount: 50 });
+myCoin.addBlock({ amount: 200 });
 
-myCoin.addBlock(new Block(2, new Date().toISOString(), { amount: 200 }));
+console.log("Is blockchain valid?", myCoin.isChainValid());
 
+// ATTACK: Someone tampers with block data
+myCoin.chain[1].data = { amount: 1000 };
+
+console.log("Is blockchain valid after attack?", myCoin.isChainValid());
 console.log(JSON.stringify(myCoin, null, 2));
+
